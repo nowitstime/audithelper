@@ -90,7 +90,7 @@ export default function App() {
                 actualltable.tablehead=headrow
                 actualltable.tabledata=tailrows
                 setdiffs(unmatchedValues(actualltable,text.split(/\r?\n/).map(addDec),"Extended Cost"))
-                actualltable=tableAudit(actualltable,text.split(/\r?\n/).map(addDec),"Extended Cost")
+                actualltable=tableAudit(actualltable,text.split(/\r?\n/),"Extended Cost")
                 console.log(text)
                 
                 setTablehead(actualltable.tablehead);
