@@ -36,7 +36,7 @@ function CreateTable(table:Table):JSX.Element{
         for(var x:number = 0; x<table.tabledata.length;x++){
                 n.push(CreateRow(table.tabledata[x],table.tablecolor));
         }
-        return <ScrollView style={{flex:.75}}>{n}</ScrollView>
+        return <ScrollView style={{borderWidth:2,flex:.75}}>{n}</ScrollView>
 
 }
 function getColumnByHead(table:Table,headvalue:string):string[]{
@@ -68,14 +68,15 @@ function tableAudit(tableA:Table,auditValues:string[],columnchoice:string):Table
 }
 
 export default function App() {
+          const [filterv,setfilterv] = useState("Extended Cost");
           const [text,setText] = useState("");
           const [textI,setTextI] = useState("");
-          const [diffs,setdiffs] = useState([""])
+          const [diffs,setdiffs] = useState(["diffs"])
           const [tablehead,setTablehead] = useState(["none","none","none"]);
           const [tabledata,setTabledata] = useState([["lol","lol","lol"],
                                                    ["lol","lol","lol"],
                                                    ["lol","lol","lol"]]);
-        console.log(addDec('something'))
+        console.log(filterv)
         console.log(addDec('ei'))
         function updateTable():void{
                 var rows:string[] = textI
@@ -89,8 +90,8 @@ export default function App() {
                 var actualltable:Table = defaulttable;
                 actualltable.tablehead=headrow
                 actualltable.tabledata=tailrows
-                setdiffs(unmatchedValues(actualltable,text.split(/\r?\n/).map(addDec),"Extended Cost"))
-                actualltable=tableAudit(actualltable,text.split(/\r?\n/).map(addDec),"Extended Cost")
+                setdiffs(unmatchedValues(actualltable,text.split(/\r?\n/).map(addDec),filterv))
+                actualltable=tableAudit(actualltable,text.split(/\r?\n/).map(addDec),filterv)
                 console.log(text)
                 
                 setTablehead(actualltable.tablehead);
@@ -101,15 +102,6 @@ export default function App() {
     <View style={styles.container}>
             <Text style={{color:'black',fontSize:70,padding:20,textShadowColor:'#673394',textShadowRadius:7,shadowRadius:20}}>{"RPM Toolkit"}</Text>
             <Text style={styles.vvvtext}>{diffs.join(' ')}</Text>
-      <View style={styles.inboxes}>
-              
-              <CreateTable 
-                      tablehead={tablehead} 
-                      tabledata={tabledata} 
-                      tablecolor={"#ACE1E3"} 
-                      headcolor={"blue"}/>
-
-      </View> 
       <View style={styles.inboxes}>
         <TextInput
           style={{flex:.45,backgroundColor:'#287274', borderColor:'black',borderWidth:5,color:'white',fontSize:50}}
@@ -125,6 +117,23 @@ export default function App() {
           numberOfLines={4}
           multiline={true}
         />
+      </View> 
+      <View style={{justifyContent:"space-evenly",flexDirection:"row"}}>
+                    <TextInput
+        style={{flex:.45,backgroundColor:'#287274', borderColor:'black',borderWidth:5,color:'white',fontSize:50}}
+        onChangeText={text => {setfilterv(text);updateTable()}}
+        placeholder="Extended Cost"
+      />
+
+      </View>
+      <View style={styles.inboxes}>
+              
+              <CreateTable 
+                      tablehead={tablehead} 
+                      tabledata={tabledata} 
+                      tablecolor={"#ACE1E3"} 
+                      headcolor={"#789d9e"}/>
+
       </View> 
       <StatusBar style="auto" />
     </View>
@@ -152,7 +161,7 @@ const styles = StyleSheet.create({
   },
   vvvtext:{
     fontSize: 40,
-    color: 'blue',
+    color: '#c14d49',
     fontFamily:'Roboto',
           alignSelf:'center',
   },

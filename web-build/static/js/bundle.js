@@ -36410,6 +36410,7 @@ function CreateTable(table) {
 
   return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_native_web_dist_exports_ScrollView__WEBPACK_IMPORTED_MODULE_7__["default"], {
     style: {
+      borderWidth: 2,
       flex: .75
     }
   }, n);
@@ -36454,32 +36455,37 @@ function tableAudit(tableA, auditValues, columnchoice) {
 }
 
 function App() {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(""),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])("Extended Cost"),
       _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState, 2),
-      text = _useState2[0],
-      setText = _useState2[1];
+      filterv = _useState2[0],
+      setfilterv = _useState2[1];
 
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(""),
       _useState4 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState3, 2),
-      textI = _useState4[0],
-      setTextI = _useState4[1];
+      text = _useState4[0],
+      setText = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])([""]),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(""),
       _useState6 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState5, 2),
-      diffs = _useState6[0],
-      setdiffs = _useState6[1];
+      textI = _useState6[0],
+      setTextI = _useState6[1];
 
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(["none", "none", "none"]),
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(["diffs"]),
       _useState8 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState7, 2),
-      tablehead = _useState8[0],
-      setTablehead = _useState8[1];
+      diffs = _useState8[0],
+      setdiffs = _useState8[1];
 
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])([["lol", "lol", "lol"], ["lol", "lol", "lol"], ["lol", "lol", "lol"]]),
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(["none", "none", "none"]),
       _useState10 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState9, 2),
-      tabledata = _useState10[0],
-      setTabledata = _useState10[1];
+      tablehead = _useState10[0],
+      setTablehead = _useState10[1];
 
-  console.log(addDec('something'));
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])([["lol", "lol", "lol"], ["lol", "lol", "lol"], ["lol", "lol", "lol"]]),
+      _useState12 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState11, 2),
+      tabledata = _useState12[0],
+      setTabledata = _useState12[1];
+
+  console.log(filterv);
   console.log(addDec('ei'));
 
   function updateTable() {
@@ -36493,8 +36499,8 @@ function App() {
     var actualltable = defaulttable;
     actualltable.tablehead = headrow;
     actualltable.tabledata = tailrows;
-    setdiffs(unmatchedValues(actualltable, text.split(/\r?\n/).map(addDec), "Extended Cost"));
-    actualltable = tableAudit(actualltable, text.split(/\r?\n/).map(addDec), "Extended Cost");
+    setdiffs(unmatchedValues(actualltable, text.split(/\r?\n/).map(addDec), filterv));
+    actualltable = tableAudit(actualltable, text.split(/\r?\n/).map(addDec), filterv);
     console.log(text);
     setTablehead(actualltable.tablehead);
     setTabledata(actualltable.tabledata);
@@ -36514,13 +36520,6 @@ function App() {
   }, "RPM Toolkit"), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_native_web_dist_exports_Text__WEBPACK_IMPORTED_MODULE_4__["default"], {
     style: styles.vvvtext
   }, diffs.join(' ')), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_native_web_dist_exports_View__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    style: styles.inboxes
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(CreateTable, {
-    tablehead: tablehead,
-    tabledata: tabledata,
-    tablecolor: "#ACE1E3",
-    headcolor: "blue"
-  })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_native_web_dist_exports_View__WEBPACK_IMPORTED_MODULE_6__["default"], {
     style: styles.inboxes
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_native_web_dist_exports_TextInput__WEBPACK_IMPORTED_MODULE_5__["default"], {
     style: {
@@ -36553,6 +36552,32 @@ function App() {
     defaultValue: text,
     numberOfLines: 4,
     multiline: true
+  })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_native_web_dist_exports_View__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    style: {
+      justifyContent: "space-evenly",
+      flexDirection: "row"
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_native_web_dist_exports_TextInput__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    style: {
+      flex: .45,
+      backgroundColor: '#287274',
+      borderColor: 'black',
+      borderWidth: 5,
+      color: 'white',
+      fontSize: 50
+    },
+    onChangeText: function onChangeText(text) {
+      setfilterv(text);
+      updateTable();
+    },
+    placeholder: "Extended Cost"
+  })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_native_web_dist_exports_View__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    style: styles.inboxes
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(CreateTable, {
+    tablehead: tablehead,
+    tabledata: tabledata,
+    tablecolor: "#ACE1E3",
+    headcolor: "#789d9e"
   })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(expo_status_bar__WEBPACK_IMPORTED_MODULE_1__["StatusBar"], {
     style: "auto"
   }));
@@ -36577,7 +36602,7 @@ var styles = react_native_web_dist_exports_StyleSheet__WEBPACK_IMPORTED_MODULE_3
   },
   vvvtext: {
     fontSize: 40,
-    color: 'blue',
+    color: '#c14d49',
     fontFamily: 'Roboto',
     alignSelf: 'center'
   },
